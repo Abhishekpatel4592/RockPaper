@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "951639543353",
+    "firebase_url": "https://androidproject-c7af2.firebaseio.com",
+    "project_id": "androidproject-c7af2",
+    "storage_bucket": "androidproject-c7af2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:951639543353:android:23c03a35c8b1cd31",
+        "android_client_info": {
+          "package_name": "com.example.abhishekpatel.rockpaper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "951639543353-ba43cr8qsj5qf9j3sdssetd36vkk2u5e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOH9OEcVW-wGVu1WBBk3A3J9Gea0F9vIc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

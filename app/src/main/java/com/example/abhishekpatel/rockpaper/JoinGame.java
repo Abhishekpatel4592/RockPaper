@@ -59,7 +59,9 @@ public class JoinGame extends AppCompatActivity {
                 name = edtName.getText().toString();
                 DatabaseReference ref = root.child(String.valueOf(ID));
                 DatabaseReference nref = ref.push();
+                //DatabaseReference nref = ref.child("Player2");
                 //Log.d("EDNAME:", String.valueOf(edName));
+
                 nref.child("Name").setValue(name);
                 nref.child("Choice").setValue("No Choice");
                 matchGameid();

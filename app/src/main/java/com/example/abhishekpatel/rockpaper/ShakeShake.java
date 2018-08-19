@@ -1,5 +1,6 @@
 package com.example.abhishekpatel.rockpaper;
 
+import android.content.SharedPreferences;
 import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.seismic.ShakeDetector;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class ShakeShake extends AppCompatActivity implements ShakeDetector.Listener {
@@ -20,6 +23,7 @@ public class ShakeShake extends AppCompatActivity implements ShakeDetector.Liste
     TextView Choice;
     FirebaseDatabase database;
     DatabaseReference root;
+    SharedPreferences pref;
 
     String[] RPS = {"Rock","Paper","Sicssor"};
 
@@ -27,6 +31,8 @@ public class ShakeShake extends AppCompatActivity implements ShakeDetector.Liste
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shake_shake);
+
+        pref = getSharedPreferences("MyPref",0);
 
         Choice = (TextView)findViewById(R.id.txtChange);
 
@@ -47,11 +53,25 @@ public class ShakeShake extends AppCompatActivity implements ShakeDetector.Liste
 
         Choice.setText(String.valueOf(value));
 
-        database = FirebaseDatabase.getInstance();
-        root = database.getReference();
+//        database = FirebaseDatabase.getInstance();
+//        root = database.getReference();
+
+        Log.d("Choice................................",value);
+
+        //SharedPreferences.Editor editor = pref.edit();
+
+        String id = pref.getString("id",null);
+
+        Log.d("Id......................",id);
+
+        DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child(id).push();
+        Map<String, Object> updates = new HashMap<String,Object>();
+        updates.put("Choice", value);
 
 
-        Data data = new Data("Abhi",value,"");
+       ref.updateChildren(updates);
+
+
 
 
 

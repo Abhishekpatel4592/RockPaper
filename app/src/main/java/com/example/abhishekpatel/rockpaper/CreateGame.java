@@ -2,6 +2,7 @@ package com.example.abhishekpatel.rockpaper;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.SensorManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
@@ -29,6 +30,7 @@ public class CreateGame extends AppCompatActivity implements View.OnClickListene
     TextView IDGenerate,Choice1;
     FirebaseDatabase database;
     DatabaseReference root;
+    SharedPreferences pref;
     Button btnSave;
     EditText edName;
     String name = "";
@@ -43,6 +45,8 @@ public class CreateGame extends AppCompatActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_game);
+
+        pref = getSharedPreferences("MyPref",0);
 
         IDGenerate = (TextView)findViewById(R.id.txtRandom);
 
@@ -62,6 +66,10 @@ public class CreateGame extends AppCompatActivity implements View.OnClickListene
         Random randnumber = new Random();
         num = 100000 + randnumber.nextInt(100000);
 
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("id", String.valueOf(num));
+        editor.commit();
+
         IDGenerate.setText(String.valueOf(num));
         database = FirebaseDatabase.getInstance();
         root = database.getReference();
@@ -80,7 +88,7 @@ public class CreateGame extends AppCompatActivity implements View.OnClickListene
         name = edName.getText().toString();
         DatabaseReference ref = root.child(String.valueOf(num));
         DatabaseReference nref = ref.push();
-        //Log.d("EDNAME:", String.valueOf(edName));
+        //DatabaseReference nref = ref.child("Player1");
         nref.child("Name").setValue(name);
         nref.child("Choice").setValue("No Choice");
 
